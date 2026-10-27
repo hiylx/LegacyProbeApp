@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="Main" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ProbeViewController" customModule="LegacyProbeApp" customModuleProvider="target" storyboardIdentifier="ProbeViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Legacy IOKit Probe — iOS 27.0.1&#10;Target: iPhone 15 Pro (T8130/A17 Pro)&#10;&#10;Testing Entry #10 classes:&#10;  • IOMachPort&#10;  • IOUserNotification&#10;  • IOUserIterator&#10;  • IOUserClient2022&#10;&#10;Tap 'Run Probe' to test all selectors.&#10;Results appear here.&#10;&#10;KERN_NO_ACCESS / KERN_NOT_SUPPORTED = gate holds&#10;Any other result = UAF PATH REACHABLE" textAlignment="natural" selects="NO" translatesAutoresizingMaskIntoConstraints="NO" id="textView" userInteractionEnabled="YES">
+                                <rect key="frame" x="20" y="100" width="353" height="550"/>
+                                <color key="backgroundColor" white="0.1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="0.9" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13" weight="regular"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="runButton">
+                                <rect key="frame" x="20" y="680" width="150" height="50"/>
+                                <state key="normal" title="Run Probe"/>
+                                <connections>
+                                    <action selector="runProbe:" destination="BYZ-38-t0r" eventType="touchUpInside" id="action-run"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="clearButton">
+                                <rect key="frame" x="223" y="680" width="150" height="50"/>
+                                <state key="normal" title="Clear Output"/>
+                                <connections>
+                                    <action selector="clearOutput:" destination="BYZ-38-t0r" eventType="touchUpInside" id="action-clear"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="spinner" style="medium" color="systemBlueColor" animating="NO" hidesWhenStopped="YES">
+                                <rect key="frame" x="176" y="740" width="40" height="40"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Legacy IOKit Probe — Entry #10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="titleLabel">
+                                <rect key="frame" x="20" y="60" width="353" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24" weight="bold"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="textView" firstAttribute="top" secondItem="titleLabel" secondAttribute="bottom" constant="20" id="c1"/>
+                            <constraint firstItem="textView" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="0" id="c2"/>
+                            <constraint firstItem="textView" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" constant="0" id="c3"/>
+                            <constraint firstItem="textView" firstAttribute="bottom" secondItem="runButton" secondAttribute="top" constant="-20" id="c4"/>
+                            <constraint firstItem="runButton" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="0" id="c5"/>
+                            <constraint firstItem="runButton" firstAttribute="bottom" secondItem="spinner" secondAttribute="top" constant="-20" id="c6"/>
+                            <constraint firstItem="clearButton" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" constant="0" id="c7"/>
+                            <constraint firstItem="clearButton" firstAttribute="bottom" secondItem="spinner" secondAttribute="top" constant="-20" id="c8"/>
+                            <constraint firstItem="clearButton" firstAttribute="leading" secondItem="runButton" secondAttribute="trailing" constant="20" id="c9"/>
+                            <constraint firstItem="clearButton" firstAttribute="width" secondItem="runButton" secondAttribute="width" id="c10"/>
+                            <constraint firstItem="spinner" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="c11"/>
+                            <constraint firstItem="spinner" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottomMargin" constant="-20" id="c12"/>
+                            <constraint firstItem="titleLabel" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="safeAreaLayoutGuideTop" constant="20" id="c13"/>
+                            <constraint firstItem="titleLabel" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="c14"/>
+                        </constraints>
+                        <outlets>
+                            <outlet property="outputTextView" destination="textView" id="outlet-textView"/>
+                            <outlet property="runButton" destination="runButton" id="outlet-runButton"/>
+                            <outlet property="spinner" destination="spinner" id="outlet-spinner"/>
+                        </outlets>
+                    </view>
+                    <navigationItem key="navigationItem" title="Legacy Probe" id="navItem"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="0.0" y="0.0"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icon" width="1024" height="1024"/>
+    </resources>
+</document>
