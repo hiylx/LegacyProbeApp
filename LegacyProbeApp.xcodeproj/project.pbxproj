@@ -62,7 +62,7 @@
 				AA00000C000000000000000C /* Assets.xcassets */,
 				AA0000110000000000000011 /* Info.plist */,
 			);
-			path = LegacyProbeApp;
+			path = .;
 			sourceTree = "<group>";
 		};
 		AA0000150000000000000015 /* Products */ = {
