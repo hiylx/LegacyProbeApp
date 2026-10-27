@@ -114,9 +114,9 @@
         IOServiceClose(connect);
 
         if (classReachable) {
-            [self appendOutput:[NSString stringWithFormat(@"  [***] %@: AT LEAST ONE SELECTOR REACHABLE ***\n", name)]];
+            [self appendOutput:[NSString stringWithFormat:@"  [***] %@: AT LEAST ONE SELECTOR REACHABLE ***\n", name]];
         } else {
-            [self appendOutput:[NSString stringWithFormat(@"  [*] %@: All selectors blocked/not supported\n", name)]];
+            [self appendOutput:[NSString stringWithFormat:@"  [*] %@: All selectors blocked/not supported\n", name]];
         }
     }
 
