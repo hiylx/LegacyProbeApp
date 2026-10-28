@@ -5,6 +5,9 @@
 
 @interface ProbeViewController ()
 
+@property (nonatomic, strong) UITextView *outputTextView;
+@property (nonatomic, strong) UIButton *runButton;
+@property (nonatomic, strong) UIActivityIndicatorView *spinner;
 @property (nonatomic, strong) dispatch_queue_t probeQueue;
 
 @end
@@ -13,6 +16,54 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor blackColor];
+
+    self.outputTextView = [[UITextView alloc] init];
+    self.outputTextView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.outputTextView.editable = NO;
+    self.outputTextView.backgroundColor = [UIColor colorWithWhite:0.1 alpha:1.0];
+    self.outputTextView.textColor = [UIColor colorWithWhite:0.9 alpha:1.0];
+    self.outputTextView.font = [UIFont systemFontOfSize:13];
+    [self.view addSubview:self.outputTextView];
+
+    self.runButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    self.runButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.runButton setTitle:@"Run Probe" forState:UIControlStateNormal];
+    [self.runButton addTarget:self action:@selector(runProbe:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.runButton];
+
+    UIButton *clearButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    clearButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [clearButton setTitle:@"Clear Output" forState:UIControlStateNormal];
+    [clearButton addTarget:self action:@selector(clearOutput:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:clearButton];
+
+    self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleMedium];
+    self.spinner.translatesAutoresizingMaskIntoConstraints = NO;
+    self.spinner.hidesWhenStopped = YES;
+    [self.view addSubview:self.spinner];
+
+    UILayoutGuide *safe = self.view.safeAreaLayoutGuide;
+    [NSLayoutConstraint activateConstraints:@[
+        [self.outputTextView.topAnchor constraintEqualToAnchor:safe.topAnchor constant:20],
+        [self.outputTextView.leadingAnchor constraintEqualToAnchor:safe.leadingAnchor constant:20],
+        [self.outputTextView.trailingAnchor constraintEqualToAnchor:safe.trailingAnchor constant:-20],
+        [self.outputTextView.bottomAnchor constraintEqualToAnchor:self.runButton.topAnchor constant:-20],
+
+        [self.runButton.leadingAnchor constraintEqualToAnchor:safe.leadingAnchor constant:20],
+        [self.runButton.bottomAnchor constraintEqualToAnchor:safe.bottomAnchor constant:-20],
+        [self.runButton.widthAnchor constraintEqualToConstant:150],
+        [self.runButton.heightAnchor constraintEqualToConstant:44],
+
+        [clearButton.trailingAnchor constraintEqualToAnchor:safe.trailingAnchor constant:-20],
+        [clearButton.bottomAnchor constraintEqualToAnchor:safe.bottomAnchor constant:-20],
+        [clearButton.widthAnchor constraintEqualToConstant:150],
+        [clearButton.heightAnchor constraintEqualToConstant:44],
+
+        [self.spinner.centerXAnchor constraintEqualToAnchor:safe.centerXAnchor],
+        [self.spinner.bottomAnchor constraintEqualToAnchor:safe.bottomAnchor constant:-80],
+    ]];
+
     self.probeQueue = dispatch_queue_create("com.axiom.legacyprobe", DISPATCH_QUEUE_SERIAL);
     [self appendOutput:@"Legacy IOKit Probe — iOS 27.0.1\nTarget: iPhone 15 Pro (T8130/A17 Pro)\n\nTesting Entry #10 classes:\n  • IOMachPort\n  • IOUserNotification\n  • IOUserIterator\n  • IOUserClient2022\n\nTap 'Run Probe' to test all selectors.\nResults appear here.\n\nKERN_NO_ACCESS / KERN_NOT_SUPPORTED = gate holds\nAny other result = UAF PATH REACHABLE\n"];
 }
@@ -20,7 +71,6 @@
 - (void)appendOutput:(NSString *)text {
     dispatch_async(dispatch_get_main_queue(), ^{
         self.outputTextView.text = [self.outputTextView.text stringByAppendingString:text];
-        // Auto-scroll to bottom
         NSRange bottom = NSMakeRange(self.outputTextView.text.length - 1, 1);
         [self.outputTextView scrollRangeToVisible:bottom];
     });
@@ -90,7 +140,6 @@
 
         [self appendOutput:[NSString stringWithFormat:@"  [+] IOServiceOpen succeeded: connect=0x%x\n", (unsigned int)connect]];
 
-        // Test scalar/scalar externalMethod selectors 0-19
         uint64_t input[2] = {0, 0};
         uint64_t output[2] = {0, 0};
         uint32_t outputCnt = 2;
