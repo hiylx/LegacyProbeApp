@@ -12,6 +12,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Kill stuck build service
+        run: |
+          killall SWBBuildService || true
+          killall ibtoold || true
+
       - name: Build unsigned .app
         run: |
           xcodebuild -project LegacyProbeApp.xcodeproj \
