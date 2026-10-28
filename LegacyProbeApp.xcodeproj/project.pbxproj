@@ -13,6 +13,8 @@
 		AA0000070000000000000007 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA0000080000000000000008 /* Main.storyboard */; };
 		AA0000090000000000000009 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA00000A000000000000000A /* LaunchScreen.storyboard */; };
 		AA00000B000000000000000B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA00000C000000000000000C /* Assets.xcassets */; };
+		AA0000220000000000000022 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0000200000000000000020 /* IOKit.framework */; };
+		AA0000230000000000000023 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0000210000000000000021 /* CoreFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +29,8 @@
 		AA00000A000000000000000A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AA00000C000000000000000C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA0000110000000000000011 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA0000200000000000000020 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		AA0000210000000000000021 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +38,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA0000220000000000000022 /* IOKit.framework in Frameworks */,
+				AA0000230000000000000023 /* CoreFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,6 +51,7 @@
 			children = (
 				AA0000140000000000000014 /* LegacyProbeApp */,
 				AA0000150000000000000015 /* Products */,
+				AA0000240000000000000024 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,6 +78,15 @@
 				AA00000D000000000000000D /* LegacyProbeApp.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		AA0000240000000000000024 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000200000000000000020 /* IOKit.framework */,
+				AA0000210000000000000021 /* CoreFoundation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,8 +182,11 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.axiom.legacyprobe;
+				PRODUCT_NAME = LegacyProbeApp;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -183,7 +202,9 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_OPTIMIZATION_LEVEL = "s";
+				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.axiom.legacyprobe;
 				PRODUCT_NAME = LegacyProbeApp;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
