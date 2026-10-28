@@ -145,8 +145,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA0000070000000000000007 /* Main.storyboard in Resources */,
-				AA0000090000000000000009 /* LaunchScreen.storyboard in Resources */,
 				AA00000B000000000000000B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
